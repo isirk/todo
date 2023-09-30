@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Todo List</title>
+</head>
+<body>
+    <h1>Todo List</h1>
+    <ul>
+        {% for id, item in items.items() %}
+            <li{% if item['done'] %} style="text-decoration: line-through;"{% endif %}>
+                {{ item['text'] }}
+                {% if not item['done'] %}
+                    <a href="{{ url_for('done', id=id) }}">[Done]</a>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    <form action="{{ url_for('add') }}" method="post">
+        <input type="text" name="text">
+        <input type="submit" value="Add">
+    </form>
+</body>
+</html>
